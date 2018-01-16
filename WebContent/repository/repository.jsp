@@ -30,6 +30,14 @@
                     </git:user>
                 </git:userRepo>
             </git:foreachUserRepo>
+            <git:foreachOrgRepo var="x">
+                <git:orgRepo>
+                    <c:set var="orgid" value="${git:orgRepoOrganizationIdValue()}"/>
+                    <git:organization ID="${orgid}">
+                        <p><b>Owner:</b> <a href="<util:applicationRoot/>/organization/organization.jsp?id=<git:organizationID/>"><git:organizationName/></a></p>
+                    </git:organization>
+                </git:orgRepo>
+            </git:foreachOrgRepo>
             <p><b>Private?:</b> <git:repositoryIsPrivate/></p>
             <p><b>Description:</b> <git:repositoryDescription/></p>
             <p><b>Fork?:</b> <git:repositoryFork/></p>

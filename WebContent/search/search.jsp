@@ -44,6 +44,18 @@
             </git:foreachSearchUser>
             </ol>
             
+            <h3>Organizations</h3>
+            <ol class="bulletedList">
+            <git:foreachSearchOrganization var="x">
+                <git:searchOrganization>
+                    <c:set var="orgid" value="${git:searchOrganizationOrgidValue()}"/>
+                    <git:organization ID="${orgid}">
+                        <li><a href="<util:applicationRoot/>/organization/organization.jsp?id=<git:organizationID/>"><git:organizationName/></a>
+                    </git:organization>
+                </git:searchOrganization>
+            </git:foreachSearchOrganization>
+            </ol>
+            
 			</git:searchTerm>
 
 			<jsp:include page="/footer.jsp" flush="true" /></div>

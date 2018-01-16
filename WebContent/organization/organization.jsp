@@ -18,65 +18,57 @@
 	<div id="content"><jsp:include page="/header.jsp" flush="true" />
 		<jsp:include page="/menu.jsp" flush="true"><jsp:param
 				name="caller" value="research" /></jsp:include><div id="centerCol">
-			<git:user ID="${param.id}">
+			<git:organization ID="${param.id}">
 				<h2>
-					<git:userName />
+					<git:organizationName />
 				</h2>
 
 				<p>
 					<b>Login:</b>
-					<git:userLogin />
+					<git:organizationLogin />
 				</p>
 				<p>
 					<b>Company:</b>
-					<git:userCompany />
+					<git:organizationCompany />
 				</p>
 				<p>
 					<b>Location:</b>
-					<git:userLocation />
+					<git:organizationLocation />
 				</p>
 				<p>
 					<b>email:</b>
-					<git:userEmail />
-				</p>
-				<p>
-					<b>Bio:</b>
-					<git:userBio />
+					<git:organizationEmail />
 				</p>
             <p><b>Blog:</b>
             <c:choose>
-            <c:when test="${fn:startsWith(git:userBlogValue(),'http')}">
-             <a href="<git:userBlog/>"><git:userBlog/></a>
+            <c:when test="${fn:startsWith(git:organizationBlogValue(),'http')}">
+             <a href="<git:organizationBlog/>"><git:organizationBlog/></a>
             </c:when>
             <c:otherwise>
-             <a href="http://<git:userBlog/>"><git:userBlog/></a>
+             <a href="http://<git:organizationBlog/>"><git:organizationBlog/></a>
             </c:otherwise>
             </c:choose>
             </p>
-				<p>
-					<b>Blog:</b>
-					<git:userBlog />
-				</p>
 
-                <c:if test="${git:userHasMember(param.id)}">
-                    <h3>Member of </h3>
-                    <ol class="bulletedList">
-                        <git:foreachMember var="x" useOrganization="true" sortCriteria="name">
-                            <git:member>
-                                <c:set var="oid" value="${git:memberOrganizationIdValue()}" />
-                                <git:organization ID="${oid}">
-                                    <li><a href="<util:applicationRoot/>/organization/organization.jsp?id=<git:organizationID/>"><git:organizationName /></a>
-                                </git:organization>
-                            </git:member>
-                        </git:foreachMember>
-                    </ol>
-                </c:if>
+				<c:if test="${git:organizationHasMember(param.id)}">
+					<h3>Members</h3>
+					<ol class="bulletedList">
+						<git:foreachMember var="x" useUser="true" sortCriteria="name">
+							<git:member>
+								<c:set var="uid" value="${git:memberUserIdValue()}" />
+								<git:user ID="${uid}">
+									<li><a href="<util:applicationRoot/>/user/user.jsp?id=<git:userID/>"><git:userName /></a>
+								</git:user>
+							</git:member>
+						</git:foreachMember>
+					</ol>
+				</c:if>
 
-			<h3>Repositories</h3>
-			<dl>
-				<git:foreachUserRepo var="x" useRepository="true" sortCriteria="name">
-					<git:userRepo>
-						<c:set var="rid" value="${git:userRepoRepositoryIdValue()}" />
+				<h3>Repositories</h3>
+    			<dl>
+				<git:foreachOrgRepo var="x" useRepository="true" sortCriteria="name">
+					<git:orgRepo>
+						<c:set var="rid" value="${git:orgRepoRepositoryIdValue()}" />
 						<git:repository ID="${rid}">
 							<dt>
 								<a
@@ -86,11 +78,11 @@
 								<git:repositoryDescription />
 							</dd>
 						</git:repository>
-					</git:userRepo>
-				</git:foreachUserRepo>
+					</git:orgRepo>
+				</git:foreachOrgRepo>
 			</dl>
 
-            </git:user>
+            </git:organization>
 
 			<jsp:include page="/footer.jsp" flush="true" /></div>
 	</div>

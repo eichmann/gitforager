@@ -18,6 +18,7 @@ WebContent/images/cd2h-logo.png -text
 WebContent/images/leo.png -text
 WebContent/index.jsp -text
 WebContent/menu.jsp -text
+WebContent/organization/organization.jsp -text
 WebContent/repository/repository.jsp -text
 WebContent/resources/d3.v3.min.js -text
 WebContent/resources/d3.v4.min.js -text
