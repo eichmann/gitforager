@@ -19,7 +19,7 @@
         <jsp:include page="/menu.jsp" flush="true"><jsp:param
                 name="caller" value="research" /></jsp:include><div id="centerCol">
             <git:repository ID="${param.id}">
-            <h2><git:repositoryFullName/></h2>
+            <h2><a href="http://github.com/<git:repositoryFullName/>"><git:repositoryFullName/></a></h2>
             
             <p><b>Name:</b> <git:repositoryName/></p>
             <git:foreachUserRepo var="x">
@@ -38,9 +38,14 @@
                     </git:organization>
                 </git:orgRepo>
             </git:foreachOrgRepo>
-            <p><b>Private?:</b> <git:repositoryIsPrivate/></p>
             <p><b>Description:</b> <git:repositoryDescription/></p>
-            <p><b>Fork?:</b> <git:repositoryFork/></p>
+            <c:if test="${git:repositoryForkValue()}">
+                <git:foreachParent var="x">
+                    <git:parent>
+                        <p><b>Forked from:</b> <a href="<util:applicationRoot/>/repository/repository.jsp?id=<git:parentParentId/>"><git:parentParentFullName/></a></p>
+                    </git:parent>
+                </git:foreachParent>
+            </c:if>
             <p><b>Created:</b> <git:repositoryCreatedAt/></p>
             <p><b>Updated:</b> <git:repositoryUpdatedAt/></p>
             <p><b>Pushed:</b> <git:repositoryPushedAt/></p>
