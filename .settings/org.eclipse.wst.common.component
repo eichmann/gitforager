@@ -15,16 +15,7 @@
         <dependent-module archiveName="GitHubTagLib-0.0.1-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/GitHubTagLib/GitHubTagLib">
             <dependency-type>uses</dependency-type>
         </dependent-module>
-        <dependent-module archiveName="edu.uiowa.slis-NLP-0.0.1-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/NLP_class/NLP_class">
-            <dependency-type>uses</dependency-type>
-        </dependent-module>
-        <dependent-module archiveName="Components-0.0.2-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/Components/Components">
-            <dependency-type>uses</dependency-type>
-        </dependent-module>
-        <dependent-module archiveName="ComponentsExternal-0.0.1-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/ComponentsExternal/ComponentsExternal">
-            <dependency-type>uses</dependency-type>
-        </dependent-module>
-        <dependent-module archiveName="NLP-NLP-0.0.1-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/NLP/NLP">
+        <dependent-module archiveName="NLP-0.0.1-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/NLP/NLP">
             <dependency-type>uses</dependency-type>
         </dependent-module>
         <property name="context-root" value="gitforager"/>
