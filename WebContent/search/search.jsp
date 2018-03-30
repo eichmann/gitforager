@@ -20,6 +20,8 @@
 			<git:searchTerm ID="${param.id}">
             <h2>Search: <git:searchTermTerm/></h2>
             
+            <h3><a href="graph.jsp?id=${param.id}">Visualization</a></h3>
+            <p>
             <h3>Repositories</h3>
             <ol class="bulletedList">
             <git:foreachSearchRepository var="x">

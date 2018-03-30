@@ -10,20 +10,10 @@
 <title>PubMed Central Acknowledgements 1.0</title>
 <style type="text/css" media="all">    @import "<util:applicationRoot/>/resources/style.css";</style></head>
 <body>
-<div id="content"><jsp:include page="/header.jsp" flush="true" /> <jsp:include page="/menu.jsp" flush="true"><jsp:param name="caller" value="research" /></jsp:include><div id="centerCol">
+<div id="content"><jsp:include page="/header.jsp" flush="true" />
+<jsp:include page="/menu.jsp" flush="true"><jsp:param name="caller" value="research" /></jsp:include>
+<div id="centerCol">
 Initial deployment of an app supporting exploration of PubMed Central acknowledgements.
-<h2>Sites Currently Crawled</h2>
-                <sql:query var="terms" dataSource="jdbc/GitHubTagLib">
-                    select id,term
-                    from github.search_term
-                    order by id
-                </sql:query>
-                <table>
-                <tr><th>ID</th><th>Term</th></tr>
-                <c:forEach items="${terms.rows}" var="row" varStatus="rowCounter">
-                <tr><td>${row.id}</td><td>${row.term}</td></tr>
-                </c:forEach>
-                </table>
 
 <jsp:include page="/footer.jsp" flush="true" /></div></div></body>
 </html>

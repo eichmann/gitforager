@@ -18,6 +18,9 @@
         <dependent-module archiveName="NLP-0.0.1-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/NLP/NLP">
             <dependency-type>uses</dependency-type>
         </dependent-module>
+        <dependent-module archiveName="GraphTagLib-0.0.1-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/GraphTagLib/GraphTagLib">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
         <property name="context-root" value="gitforager"/>
         <property name="java-output-path" value="/gitforager/build/classes"/>
     </wb-module>

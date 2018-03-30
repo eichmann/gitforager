@@ -24,7 +24,10 @@ WebContent/resources/d3.v3.min.js -text
 WebContent/resources/d3.v4.min.js -text
 WebContent/resources/style.css -text
 WebContent/search/addSearch.jsp -text
+WebContent/search/graph.jsp -text
 WebContent/search/search.jsp -text
 WebContent/search/search_list.jsp -text
 WebContent/user/user.jsp -text
+WebContent/visualization/forceGraph.jsp -text
+WebContent/visualization/repo_people_data.jsp -text
 /pom.xml -text

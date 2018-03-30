@@ -118,5 +118,10 @@
         	<artifactId>GitHubTagLib</artifactId>
         	<version>0.0.1-SNAPSHOT</version>
         </dependency>
+        <dependency>
+        	<groupId>GraphTagLib</groupId>
+        	<artifactId>GraphTagLib</artifactId>
+        	<version>0.0.1-SNAPSHOT</version>
+        </dependency>
   </dependencies>
 </project>

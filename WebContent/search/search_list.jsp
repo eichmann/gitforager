@@ -29,8 +29,8 @@
 			 <git:searchTerm>
                     <tr>
                         <td><git:searchTermID/></td>
-                        <td><git:searchTermTerm/></td>
-                        <td><a href="search.jsp?id=<git:searchTermID/>">${git:searchRepositoryCountBySearchTerm(git:searchTermIDValue()) }</a></td>
+                        <td><a href="search.jsp?id=<git:searchTermID/>"><git:searchTermTerm/></a></td>
+                        <td>${git:searchRepositoryCountBySearchTerm(git:searchTermIDValue()) }</td>
                         <td>${git:searchUserCountBySearchTerm(git:searchTermIDValue()) }</td>
                     </tr>
 			 </git:searchTerm>
