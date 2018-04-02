@@ -18,10 +18,31 @@
 	<div id="content"><jsp:include page="/header.jsp" flush="true" />
 		<jsp:include page="/menu.jsp" flush="true"><jsp:param
 				name="caller" value="research" /></jsp:include><div id="centerCol">
-			<git:user ID="${param.id}">
+
+            <c:choose>
+            <c:when test="${not empty param.sid}">
+                 <sql:query var="rels" dataSource="jdbc/GitHubTagLib">
+                     select uid, rank from github.search_user where relevant is null and sid=?::int order by rank limit 1;
+                 <sql:param>${param.sid}</sql:param>
+                 </sql:query>
+                 <c:forEach items="${rels.rows}" var="row">
+                     <c:set var="uid" value="${row.uid}"/>
+                     <c:set var="rank" value="${row.rank}"/>
+                 </c:forEach>
+            </c:when>
+            <c:otherwise>
+                 <c:set var="uid" value="${param.id}" />
+            </c:otherwise>
+            </c:choose>
+
+			<git:user ID="${uid}">
 				<h2>
 					<git:userName />
 				</h2>
+
+                <c:if test="${not empty param.sid}">
+                    <h3>Rank: ${rank} - <a href="judgeUser.jsp?relevant=true&sid=${param.sid}&uid=${uid}">relevant</a> - <a href="judgeUser.jsp?relevant=false&sid=${param.sid}&uid=${uid}">non-relevant</a></h3>
+                </c:if>
 
 				<p>
 					<b>Login:</b>
@@ -58,7 +79,7 @@
 					<git:userBlog />
 				</p>
 
-                <c:if test="${git:userHasMember(param.id)}">
+                <c:if test="${git:userHasMember(uid)}">
                     <h3>Member of </h3>
                     <ol class="bulletedList">
                         <git:foreachMember var="x" useOrganization="true" sortCriteria="name">

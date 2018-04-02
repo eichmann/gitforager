@@ -24,7 +24,7 @@
             <p>
             <h3>Repositories</h3>
             <ol class="bulletedList">
-            <git:foreachSearchRepository var="x">
+            <git:foreachSearchRepository var="x" useRepository="true" >
                 <git:searchRepository>
                     <c:set var="rid" value="${git:searchRepositoryRidValue()}"/>
                     <git:repository ID="${rid}">
@@ -36,7 +36,7 @@
             
             <h3>Users</h3>
             <ol class="bulletedList">
-            <git:foreachSearchUser var="x">
+            <git:foreachSearchUser var="x" useUser="true">
                 <git:searchUser>
                     <c:set var="uid" value="${git:searchUserUidValue()}"/>
                     <git:user ID="${uid}">
@@ -48,7 +48,7 @@
             
             <h3>Organizations</h3>
             <ol class="bulletedList">
-            <git:foreachSearchOrganization var="x">
+            <git:foreachSearchOrganization var="x" useOrganization="true">
                 <git:searchOrganization>
                     <c:set var="orgid" value="${git:searchOrganizationOrgidValue()}"/>
                     <git:organization ID="${orgid}">

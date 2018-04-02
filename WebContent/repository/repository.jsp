@@ -18,9 +18,30 @@
     <div id="content"><jsp:include page="/header.jsp" flush="true" />
         <jsp:include page="/menu.jsp" flush="true"><jsp:param
                 name="caller" value="research" /></jsp:include><div id="centerCol">
-            <git:repository ID="${param.id}">
+ 
+            <c:choose>
+            <c:when test="${not empty param.sid}">
+                 <sql:query var="rels" dataSource="jdbc/GitHubTagLib">
+                     select rid, rank from github.search_repository where relevant is null and sid=?::int and exists (select id from github.repository where id=rid) order by rank limit 1;
+                 <sql:param>${param.sid}</sql:param>
+                 </sql:query>
+                 <c:forEach items="${rels.rows}" var="row">
+                     <c:set var="rid" value="${row.rid}"/>
+                     <c:set var="rank" value="${row.rank}"/>
+                 </c:forEach>
+            </c:when>
+            <c:otherwise>
+                 <c:set var="rid" value="${param.id}" />
+            </c:otherwise>
+            </c:choose>
+
+            <git:repository ID="${rid}">
             <h2><a href="http://github.com/<git:repositoryFullName/>"><git:repositoryFullName/></a></h2>
             
+            <c:if test="${not empty param.sid}">
+                <h3>Rank: ${rank} - <a href="judgeRepository.jsp?relevant=true&sid=${param.sid}&rid=${rid}">relevant</a> - <a href="judgeRepository.jsp?relevant=false&sid=${param.sid}&rid=${rid}">non-relevant</a></h3>
+            </c:if>
+
             <p><b>Name:</b> <git:repositoryName/></p>
             <git:foreachUserRepo var="x">
                 <git:userRepo>
@@ -62,7 +83,7 @@
             <p><b>Size:</b> <git:repositorySize/></p>
             <p><b>Language:</b> <git:repositoryLanguage/></p>
             
-            <c:if test="${git:readmeExists(param.id)}">
+            <c:if test="${git:readmeExists(rid)}">
             <h3>README</h3>
             <git:foreachReadme var="x">
                 <git:readme>

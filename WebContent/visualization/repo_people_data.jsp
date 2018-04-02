@@ -13,7 +13,8 @@
 		select id, name, full_name, description, homepage 
 		from github.repository, github.search_repository
 		where github.repository.id = github.search_repository.rid
-		and github.search_repository.sid = ?::int;
+		and github.search_repository.sid = ?::int
+		and relevant
 		<sql:param>${param.id}</sql:param>
 	</sql:query>
 	<c:forEach items="${repo.rows}" var="row" varStatus="rowCounter">
@@ -29,7 +30,7 @@
       			where github.user_repo.repository_id in 
       					(select github.search_repository.rid 
 						from github.search_repository 
-						where github.search_repository.sid = ?::int)
+						where github.search_repository.sid = ?::int and relevant)
 	  	);
         <sql:param>${param.id}</sql:param>
 	</sql:query>
@@ -44,7 +45,7 @@
 			(select github.repository.id  
 			from github.repository, github.search_repository
 			where github.repository.id = github.search_repository.rid
-			and github.search_repository.sid = ?::int);
+			and github.search_repository.sid = ?::int and relevant);
         <sql:param>${param.id}</sql:param>
 	</sql:query>
 	<c:forEach items="${commiters.rows}" var="row" varStatus="rowCounter">
@@ -58,7 +59,7 @@
 			(select github.repository.id  
 			from github.repository, github.search_repository
 			where github.repository.id = github.search_repository.rid
-			and github.search_repository.sid = ?::int)
+			and github.search_repository.sid = ?::int and relevant)
 		group by commit.id, commit.user_id, commit.name;
         <sql:param>${param.id}</sql:param>
 	</sql:query>
@@ -72,7 +73,7 @@
 		where github.repository.id in 
 				(select github.search_repository.rid 
 				from github.search_repository 
-				where github.search_repository.sid = ?::int)
+				where github.search_repository.sid = ?::int and relevant)
 		and github.repository.id = github.user_repo.repository_id
 		and github.user_repo.user_id = github.user.id;
         <sql:param>${param.id}</sql:param>

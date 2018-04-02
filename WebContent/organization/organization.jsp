@@ -18,10 +18,31 @@
 	<div id="content"><jsp:include page="/header.jsp" flush="true" />
 		<jsp:include page="/menu.jsp" flush="true"><jsp:param
 				name="caller" value="research" /></jsp:include><div id="centerCol">
-			<git:organization ID="${param.id}">
+
+			<c:choose>
+			<c:when test="${not empty param.sid}">
+			     <sql:query var="rels" dataSource="jdbc/GitHubTagLib">
+			         select orgid, rank from github.search_organization where relevant is null and sid=?::int order by rank limit 1;
+			     <sql:param>${param.sid}</sql:param>
+			     </sql:query>
+			     <c:forEach items="${rels.rows}" var="row">
+			         <c:set var="orgid" value="${row.orgid}"/>
+                     <c:set var="rank" value="${row.rank}"/>
+			     </c:forEach>
+			</c:when>
+			<c:otherwise>
+			     <c:set var="orgid" value="${param.id}" />
+			</c:otherwise>
+			</c:choose>
+
+			<git:organization ID="${orgid}">
 				<h2>
 					<git:organizationName />
 				</h2>
+				
+				<c:if test="${not empty param.sid}">
+                    <h3>Rank: ${rank} - <a href="judgeOrganization.jsp?relevant=true&sid=${param.sid}&orgid=${orgid}">relevant</a> - <a href="judgeOrganization.jsp?relevant=false&sid=${param.sid}&orgid=${orgid}">non-relevant</a></h3>
+				</c:if>
 
 				<p>
 					<b>Login:</b>
@@ -50,7 +71,7 @@
             </c:choose>
             </p>
 
-				<c:if test="${git:organizationHasMember(param.id)}">
+				<c:if test="${git:organizationHasMember(orgid)}">
 					<h3>Members</h3>
 					<ol class="bulletedList">
 						<git:foreachMember var="x" useUser="true" sortCriteria="name">
