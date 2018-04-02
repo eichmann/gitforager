@@ -47,7 +47,14 @@
                 <git:userRepo>
                     <c:set var="uid" value="${git:userRepoUserIdValue()}"/>
                     <git:user ID="${uid}">
-                        <p><b>Owner:</b> <a href="<util:applicationRoot/>/user/user.jsp?id=<git:userID/>"><git:userName/></a></p>
+                        <c:choose>
+                        <c:when test="${empty git:userNameValue() }">
+	                        <p><b>Owner:</b> <a href="<util:applicationRoot/>/user/user.jsp?id=<git:userID/>"><git:userLogin/></a></p>
+                        </c:when>
+                        <c:otherwise>
+	                        <p><b>Owner:</b> <a href="<util:applicationRoot/>/user/user.jsp?id=<git:userID/>"><git:userName/></a></p>
+                        </c:otherwise>
+                        </c:choose>
                     </git:user>
                 </git:userRepo>
             </git:foreachUserRepo>
@@ -55,7 +62,14 @@
                 <git:orgRepo>
                     <c:set var="orgid" value="${git:orgRepoOrganizationIdValue()}"/>
                     <git:organization ID="${orgid}">
-                        <p><b>Owner:</b> <a href="<util:applicationRoot/>/organization/organization.jsp?id=<git:organizationID/>"><git:organizationName/></a></p>
+                        <c:choose>
+                        <c:when test="${empty git:organizationNameValue() }">
+	                        <p><b>Owner:</b> <a href="<util:applicationRoot/>/organization/organization.jsp?id=<git:organizationID/>"><git:organizationLogin/></a></p>
+                        </c:when>
+                        <c:otherwise>
+	                        <p><b>Owner:</b> <a href="<util:applicationRoot/>/organization/organization.jsp?id=<git:organizationID/>"><git:organizationName/></a></p>
+                        </c:otherwise>
+                        </c:choose>
                     </git:organization>
                 </git:orgRepo>
             </git:foreachOrgRepo>
