@@ -97,6 +97,38 @@
             <p><b>Size:</b> <git:repositorySize/></p>
             <p><b>Language:</b> <git:repositoryLanguage/></p>
             
+            <p><b>GitHub Committers</b>
+            <table>
+            <tr><th>User</th><th>Most Recent Commit</th><th># Commits</th></tr>
+            <git:foreachCommitter var="x">
+            	<git:committer>
+                    <c:set var="uid" value="${git:committerUidValue()}"/>
+                    <git:user ID="${uid}">
+                        <c:choose>
+                        <c:when test="${empty git:userNameValue() }">
+                        	<tr><td><a href="<util:applicationRoot/>/user/user.jsp?id=<git:userID/>"><git:userLogin/></a></td><td><git:committerMostRecent/></td><td><git:committerCount/></td></tr>
+                        </c:when>
+                        <c:otherwise>
+	                       	<tr><td><a href="<util:applicationRoot/>/user/user.jsp?id=<git:userID/>"><git:userName/></a></td><td><git:committerMostRecent/></td><td><git:committerCount/></td></tr>
+                        </c:otherwise>
+                        </c:choose>
+            		</git:user>
+            	</git:committer>
+            </git:foreachCommitter>
+            </table>
+            <p>
+            
+            <p><b>Other Committers</b>
+            <table>
+            <tr><th>User</th><th>Email</th><th>Most Recent Commit</th><th># Commits</th></tr>
+            <git:foreachOtherCommitter var="x">
+            	<git:otherCommitter>
+                    <tr><td><git:otherCommitterName/></td><td><git:otherCommitterEmail/></td><td><git:otherCommitterMostRecent/></td><td><git:otherCommitterCount/></td></tr>
+            	</git:otherCommitter>
+            </git:foreachOtherCommitter>
+            </table>
+            <p>
+            
             <c:if test="${git:readmeExists(rid)}">
             <h3>README</h3>
             <git:foreachReadme var="x">

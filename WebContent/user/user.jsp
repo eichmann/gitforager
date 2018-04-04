@@ -111,6 +111,20 @@
 				</git:foreachUserRepo>
 			</dl>
 
+            <p><b>Commits To</b>
+            <table>
+            <tr><th>Repository</th><th>Most Recent Commit</th><th># Commits</th></tr>
+            <git:foreachCommitter var="x">
+            	<git:committer>
+                    <c:set var="rid" value="${git:committerRidValue()}"/>
+                    <git:repository ID="${rid}">
+                        <tr><td><a href="<util:applicationRoot/>/repository/repository.jsp?id=<git:repositoryID/>"><git:repositoryFullName/></a></td><td><git:committerMostRecent/></td><td><git:committerCount/></td></tr>
+            		</git:repository>
+            	</git:committer>
+            </git:foreachCommitter>
+            </table>
+            <p>
+            
             </git:user>
 
 			<jsp:include page="/footer.jsp" flush="true" /></div>
