@@ -7,13 +7,13 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>PubMed Central Acknowledgements 1.0</title>
+<title>gitForager</title>
 <style type="text/css" media="all">    @import "<util:applicationRoot/>/resources/style.css";</style></head>
 <body>
 <div id="content"><jsp:include page="/header.jsp" flush="true" />
 <jsp:include page="/menu.jsp" flush="true"><jsp:param name="caller" value="research" /></jsp:include>
 <div id="centerCol">
-Initial deployment of an app supporting exploration of PubMed Central acknowledgements.
+Initial deployment of an app supporting exploration of GitHub metadata.
 
 <jsp:include page="/footer.jsp" flush="true" /></div></div></body>
 </html>
