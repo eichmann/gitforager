@@ -82,10 +82,10 @@ var colorScale = d3.scaleLinear()
                                    window.open("/gitforager/repository/repository.jsp?id="+d.url.substring(1),"_self");
                                 } else if (d.group == 2) {
                                    window.open("/gitforager/user/user.jsp?id="+d.url,"_self");
-                                } else if (d.group == 3) { // TODO this one still needs work!
-                                    window.open("/gitforager/user/user.jsp?id="+d.url.substring(1),"_self");                                        
-                                } else if (d.group == 5) { // TODO check with dave to make sure this is correct
-                                    window.open("/gitforager/user/user.jsp?id="+d.url.substring(1),"_self");                                        
+                                } else if (d.group == 3) { // TODO this one still needs work! (Need to handle non-id-holding committers.)
+                                    window.open("/gitforager/user/user.jsp?id="+d.url,"_self");                                        
+                                } else if (d.group == 5) {
+                                    window.open("/gitforager/organization/organization.jsp?id="+d.url.substring(1),"_self");                                        
                                 }
                               })
   .call(d3.drag()
