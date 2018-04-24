@@ -1,15 +1,26 @@
-<svg width="1500" height="1000"></svg>
+<!-- <svg width="1500" height="1000"></svg> -->
 <script src="https://d3js.org/d3.v4.min.js"></script>
 <script src="//d3js.org/d3-scale-chromatic.v0.3.min.js"></script>
 <script>
 
-var svg = d3.select("svg"),
-    width = +svg.attr("width"),
-    height = +svg.attr("height");
+var center = d3.select('#centerCol').node();
+var left  = d3.select('#leftCol').node();
+var content  = d3.select('#content').node();
+
+var width = center.getBoundingClientRect().width - left.getBoundingClientRect().width ,
+	height = (window.innerHeight - content.getBoundingClientRect().height) + 100,
+	padding = 40, 
+	radius = 5; 
+ 
+var svg = d3.select("#centerCol").append("svg")
+	.attr("xmlns","http://www.w3.org/2000/svg")
+	.attr("width", width+padding)
+	.attr("height", height+padding);
+
 
 var color = d3.scaleOrdinal()
-	.domain(["1", "2", "3"])
-	.range(["#2E90C8", "#68d659", "#F3BB30"]);
+	.domain(["1", "2", "3", "5"])
+	.range(["#2E90C8", "#ea7156", "#F3BB30", "#68d659"]);
 
 
 
@@ -61,6 +72,7 @@ var colorScale = d3.scaleLinear()
             .size(50)
         .type(function(d) { 
         if (d.group == 1 || d.group == 4) {return d3.symbols[1];} 
+        if (d.group == 5) {return d3.symbols[3];}
         else {return d3.symbols[0];}
         }))
   .attr("fill", function(d) { return color(d.group); })
@@ -71,6 +83,8 @@ var colorScale = d3.scaleLinear()
                                 } else if (d.group == 2) {
                                    window.open("/gitforager/user/user.jsp?id="+d.url,"_self");
                                 } else if (d.group == 3) { // TODO this one still needs work!
+                                    window.open("/gitforager/user/user.jsp?id="+d.url.substring(1),"_self");                                        
+                                } else if (d.group == 5) { // TODO check with dave to make sure this is correct
                                     window.open("/gitforager/user/user.jsp?id="+d.url.substring(1),"_self");                                        
                                 }
                               })
@@ -90,15 +104,16 @@ var colorScale = d3.scaleLinear()
   simulation.force("link")
       .links(graph.links);
 
+  
   function ticked() {
+    // added bouding box
+    node.attr("transform", function(d) {return  "translate(" + ( Math.max(radius, Math.min(width - radius, d.x))) + "," + (Math.max(radius, Math.min(height - radius, d.y))) + ")" ;});
+    
     link
-        .attr("x1", function(d) { return d.source.x; })
-        .attr("y1", function(d) { return d.source.y; })
-        .attr("x2", function(d) { return d.target.x; })
-        .attr("y2", function(d) { return d.target.y; });
-
-    node.attr("transform", function(d) { return "translate(" + (d.x) + "," + (d.y) + ")"; });
-
+    .attr("x1", function(d) { return ( Math.max(radius, Math.min(width - radius, d.source.x))) ; })
+    .attr("y1", function(d) { return (Math.max(radius, Math.min(height - radius, d.source.y))) ; })
+    .attr("x2", function(d) { return ( Math.max(radius, Math.min(width - radius, d.target.x)))  ; })
+    .attr("y2", function(d) { return (Math.max(radius, Math.min(height - radius, d.target.y))) ; });
   }
 });
 

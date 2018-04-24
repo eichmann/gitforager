@@ -37,7 +37,7 @@
 	<c:forEach items="${people.rows}" var="row" varStatus="rowCounter">
 		<graph:node uri="${row.id}" label="${row.name}"  group="2" />
 	</c:forEach>
-
+	
 	<sql:query var="commiters" dataSource="jdbc/GitHubTagLib">
 		select distinct coalesce(cast(github.commit.user_id as text), github.commit.name) as id, coalesce(github.commit.name,github.commit.login) as name
 		from github.commit
@@ -50,6 +50,39 @@
 	</sql:query>
 	<c:forEach items="${commiters.rows}" var="row" varStatus="rowCounter">
 		<graph:node uri="${row.id}" label="${row.name}"  group="3" />
+	</c:forEach>
+	
+	<sql:query var="orgs" dataSource="jdbc/GitHubTagLib">
+		select id, login, description, blog 
+		from github.organization, github.search_organization
+		where github.organization.id = github.search_organization.orgid
+		and github.search_organization.sid = ?::int
+		and relevant;
+		<sql:param>${param.id}</sql:param>
+	</sql:query>
+	<c:forEach items="${orgs.rows}" var="row" varStatus="rowCounter">
+		<graph:node uri="o${row.id}" label="${row.login}" group="5" />
+	</c:forEach>
+	
+	<sql:query var="org_links" dataSource="jdbc/GitHubTagLib">
+		select organization_id, repository_id from github.org_repo
+		where organization_id in 
+			(select id
+			from github.organization, github.search_organization
+			where github.organization.id = github.search_organization.orgid
+			and github.search_organization.sid = ?::int
+			and relevant)
+		and repository_id in
+		    (select id
+			from github.repository, github.search_repository
+			where github.repository.id = github.search_repository.rid
+			and github.search_repository.sid = ?::int
+			and relevant);
+		<sql:param>${param.id}</sql:param>
+		<sql:param>${param.id}</sql:param>
+	</sql:query>
+	<c:forEach items="${org_links.rows}" var="row" varStatus="rowCounter">
+		<graph:edge source="o${row.organization_id}" target="r${row.repository_id}"  weight=".5" />
 	</c:forEach>
 	
 	<sql:query var="links_commit" dataSource="jdbc/GitHubTagLib">
