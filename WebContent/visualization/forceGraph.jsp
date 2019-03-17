@@ -4,12 +4,10 @@
 <script>
 
 var center = d3.select('#centerCol').node();
-var left  = d3.select('#leftCol').node();
-var content  = d3.select('#content').node();
 
-var width = center.getBoundingClientRect().width - left.getBoundingClientRect().width ,
-	height = (window.innerHeight - content.getBoundingClientRect().height) + 100,
-	padding = 40, 
+var width = center.getBoundingClientRect().width,
+	height = width,
+	padding = 10, 
 	radius = 5; 
  
 var svg = d3.select("#centerCol").append("svg")

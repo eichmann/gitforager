@@ -12,19 +12,38 @@
 WebContent/META-INF/MANIFEST.MF -text
 WebContent/WEB-INF/web.xml -text
 WebContent/footer.jsp -text
+WebContent/head.jsp -text
 WebContent/header.jsp -text
 WebContent/images/bullet-l1.gif -text
 WebContent/images/cd2h-logo.png -text
+WebContent/images/cd2h_honeycomb.png -text svneol=unset#image/png
+WebContent/images/cd2h_invent.png -text svneol=unset#image/png
+WebContent/images/ctsa-g-logo.jpg -text svneol=unset#image/jpeg
+WebContent/images/labs-logo.png -text svneol=unset#image/png
+WebContent/images/labslogo2.png -text svneol=unset#image/png
 WebContent/images/leo.png -text
+WebContent/images/masthead-divider.png -text svneol=unset#image/png
+WebContent/images/masthead-hhs-logo.png -text svneol=unset#image/png
+WebContent/images/masthead-nih-logo.png -text svneol=unset#image/png
+WebContent/images/onlinelogomaker-111617-1142-7717.png -text svneol=unset#image/png
+WebContent/images/person_icon.png -text svneol=unset#image/png
 WebContent/index.jsp -text
+WebContent/local_nav.jsp -text
 WebContent/menu.jsp -text
 WebContent/organization/judgeOrganization.jsp -text
 WebContent/organization/organization.jsp -text
 WebContent/repository/judgeRepository.jsp -text
 WebContent/repository/repository.jsp -text
+WebContent/resources/cd2h -text
+WebContent/resources/css -text
 WebContent/resources/d3.v3.min.js -text
 WebContent/resources/d3.v4.min.js -text
+WebContent/resources/jdbc_environment.jsp -text
+WebContent/resources/layout(old).css -text
+WebContent/resources/layout.css -text
+WebContent/resources/slick.min.css -text
 WebContent/resources/style.css -text
+WebContent/resources/styles.css -text
 WebContent/search/addSearch.jsp -text
 WebContent/search/graph.jsp -text
 WebContent/search/search.jsp -text
