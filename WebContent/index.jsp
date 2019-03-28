@@ -19,7 +19,7 @@
     <div class="container pl-0 pr-0">
         <br /> <br />
         <div class="container-fluid">
-Search against a curated list of CTSA-relevant GitHub content.
+Explore the relationships in a curated list of CTSA-relevant GitHub content.
             </div>
             <div style="width: 100%; float: left">
                 <jsp:include page="footer.jsp" flush="true" />
